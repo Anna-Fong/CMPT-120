@@ -47,6 +47,10 @@ if discount == 0:
 if discount != 0:
     totalBali = (flightBali + hotelBali * userNights) * ((100 - discount)/100)
 
+# Round total costs
+roundedVienna = round(totalVienna, 2)   
+roundedBali = round(totalBali, 2) 
+
 # Make recommendations based on user's responses
 # If user prefers culture over beach -> Vienna
 if userCulture == 'y' and userActivity == 'n':
