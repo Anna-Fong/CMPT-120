@@ -84,13 +84,20 @@ elif userCulture == 'n' and userActivity == 'n':
 
 # If user prefers both culture and beaches, calculate more expensive trip and offer that to the user
 else: 
-    # If the trip to Vienna is more expensive, suggest Vienna
-    if viennaTotal()>baliTotal():
-        print("hi")
+    # Re-write total costs of both trips. Must re-write lines because they are stuck in functions
+    totalVienna = (flightVienna + hotelVienna * userNights) * (1-seniorDiscount)
+    totalBali = (flightBali + hotelBali * userNights) * (1-seniorDiscount)
 
-    # if the price for Bali is more expensive or equal to Vienna, suggest Bali 
+    # If the trip to Vienna is more expensive, suggest this trip to the user
+    # This prints out the totals when doing this kind of comparison
+    if totalVienna>totalBali:
+        viennaInfo()
+        viennaTotal()
+
+    # When the price for Bali is more expensive or equal to Vienna, suggest going to Bali to user
     else: 
-        print("bye")
+        baliInfo()
+        baliTotal()
  
 # Ask user if they are interested in creating a user account
 userAccount = input("\nAre you interested, and want to create a user account?\nPlease answer y/n: --> ")
@@ -104,7 +111,7 @@ elif userAccount == 'y':
     lastLetter = userName[-1] 
     beginningPassword = lastLetter * (userAge % 8)
     middlePassword = userName[0]
-    endPassword = random.randint(1,5) * "!"
+    endPassword = random.randint(0,5) * "!"
     password = beginningPassword + middlePassword + endPassword
     print("Looking forward to working with you!\nYour one-time password is: " + password)
 
