@@ -1,11 +1,15 @@
-
+# Purpose: Create a program that acts as a "travel agent bot". For example, it will ask the user some 
+#          questions and make a recommendation based on their responses. 
+# Authors: Anna Fong, Kaitlyn Lum
+# Date: May 22, 2023
+# Course: CMPT 120
 
 import random
 
 # Greeting for user 
 print('Welcome! I am your friendly travel agent bot.\nI will ask you some questions, and make a\n'\
-'recommendation based on your answer.\nIf you are interested , I will provide you\n'\
-'with a one - time password to create a user\naccount on our website .\n')
+'recommendation based on your answer.\nIf you are interested, I will provide you\n'\
+'with a one - time password to create a user\naccount on our website.\n')
 
 # Ask user for name and greet user
 userName = input("What is your name? --> ")
@@ -15,11 +19,10 @@ print("Hello dear " + userName + "!\n")
 userAge = int(input("What is your age? --> "))
 
 #calculates the discount if user is a senior (over 64 in age)
-seniorDiscount=0
 if userAge > 64:
-    seniorDiscount=(userAge-64)/100
+    seniorDiscount = (userAge - 64)/100
     print("Great! We offer a senior discount.\nFor every year over 64, you get 1% off.")
-else: seniorDiscount=0
+else: seniorDiscount = 0
 
 # Ask user how many nights they want to stay
 userNights = int(input("\nFor how many nights do you want to stay? --> "))
@@ -38,13 +41,13 @@ hotelBali = 235.35
 def viennaTotal():
     totalVienna = (flightVienna + hotelVienna * userNights) * (1-seniorDiscount)
     rTotalVienna = round(totalVienna,2)
-    print(str(rTotalVienna)+ "$")
+    print(str(rTotalVienna) + "$")
     return totalVienna
 
 # Function to calculate total Bali cost
 def baliTotal():
     totalBali = (flightBali + hotelBali * userNights) * (1-seniorDiscount)
-    rTotalBali = round(totalBali)
+    rTotalBali = round(totalBali,2)
     print(str(rTotalBali) + "$")
     return totalBali
 
@@ -53,7 +56,7 @@ def viennaInfo():
     print("\nHow about a trip to Vienna?")
     print("Flight: " + str(flightVienna) + "$")
     print("Hotel: " + str(hotelVienna) + "$/night")
-    print("Discount: " + str(int(seniorDiscount)) + "%")
+    print("Discount: " + str(int(seniorDiscount*100)) + "%")
     print("Total for", str(userNights) , "nights (incl. discounts): ", end="")
 
 # Function to display standard Bali costs
@@ -61,7 +64,7 @@ def baliInfo():
     print("\nHow about a trip to Bali?")
     print("Flight: " + str(flightBali) + "$")
     print("Hotel: " + str(hotelBali) + "$/night")
-    print("Discount: " + str(int(seniorDiscount)) + "%")
+    print("Discount: " + str(int(seniorDiscount*100)) + "%")
     print("Total for", str(userNights) , "nights (incl. discounts): ", end="")
 
 # Make recommendations based on user's responses
@@ -83,14 +86,11 @@ elif userCulture == 'n' and userActivity == 'n':
 else: 
     # If the trip to Vienna is more expensive, suggest Vienna
     if viennaTotal()>baliTotal():
-        viennaInfo()
-        viennaTotal()
+        print("hi")
 
     # if the price for Bali is more expensive or equal to Vienna, suggest Bali 
     else: 
-        baliInfo()
-        baliTotal()
-
+        print("bye")
  
 # Ask user if they are interested in creating a user account
 userAccount = input("\nAre you interested, and want to create a user account?\nPlease answer y/n: --> ")
@@ -109,7 +109,7 @@ elif userAccount == 'y':
     print("Looking forward to working with you!\nYour one-time password is: " + password)
 
 # Display goodbye message
-    print("\nGoodbye.")
+print("\nGoodbye.")
 
 
 
