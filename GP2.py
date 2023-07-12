@@ -15,7 +15,7 @@ dressColours = ["magenta","#d85c64","purple","light blue","light green"]
 shoeColours = ["black","grey","#65350f"]
 
 # function to draw ground
-def groundDrawing(x,y):
+def ground(x,y):
     turtle.penup()
     turtle.goto(x,y)
     turtle.pendown()
@@ -47,7 +47,7 @@ def shoe(x,y):
     turtle.shapesize(1,1)
 
 # function to draw dress
-def dressDrawing():
+def dress():
     turtle.penup()
     turtle.color(random.choice(dressColours))
     turtle.goto(-150,-200)
@@ -72,7 +72,7 @@ def dressDrawing():
     turtle.end_fill()
 
 # function to draw head
-def headDrawing():
+def head():
     turtle.pencolor("#ee4eaa")
     turtle.fillcolor("#ffacdc")
     turtle.penup()
@@ -108,7 +108,7 @@ def headDrawing():
         turtle.forward(1)
 
 # function to draw one nostril
-def nostrilDrawing(x,y):
+def nostril(x,y):
     turtle.penup()
     turtle.goto(x,y)
     turtle.pendown()
@@ -118,7 +118,7 @@ def nostrilDrawing(x,y):
     turtle.stamp()
 
 # function to draw ears
-def earDrawing():
+def ears():
     # draw left ear
     turtle.shape("classic")
     turtle.penup()
@@ -201,7 +201,7 @@ def mouth():
     turtle.shape("circle")
 
 # function to draw arms
-def arm():
+def arms():
     # draw left arm
     turtle.penup()
     turtle.pensize(10)
@@ -251,21 +251,21 @@ def tail():
 turtle.speed(10)
 
 # call all the functions to draw image
-groundDrawing(-300,-250)
+ground(-300,-250)
 leg(-50,-195) # left leg
 leg(50,-195) # right leg
 shoe(70,-242) # left shoe
 shoe(-30,-242) # right shoe
-dressDrawing()
-headDrawing()
-nostrilDrawing(120,185) # left nostril
-nostrilDrawing(135,188) # right nostril
-earDrawing()
+dress()
+head()
+nostril(120,185) # left nostril
+nostril(135,188) # right nostril
+ears()
 blush()
 eye(-12,160) # left eye
 eye(30,179) # right eye
 mouth()
-arm()
+arms()
 tail()
 
 turtle.hideturtle()
