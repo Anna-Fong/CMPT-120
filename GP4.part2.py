@@ -39,7 +39,6 @@ print(flight_prices)
 print(hotel_prices)
 print(highlights)
 
-
 def welcome():
     print('Welcome! I am your friendly travel agent bot.\n'\
     'I will ask you some questions, and make a\nrecommendation based on'\
@@ -69,8 +68,6 @@ def ask_user_preferences():
         highlightQuestion = "Do you like " + highlight + " ?"
         vacation_activity_booleans.append(ask_yesno(highlightQuestion))
     return vacation_activity_booleans
-
- 
  
 def ask_yesno(yesnoquestion):
 
@@ -115,7 +112,6 @@ def compute_totalcost(tripDestination, numberOfNights, age):
     else:
         roundedTotalCost = 0
     return roundedTotalCost
-    
 
 def show_tripdetails(tripDestination, numberOfNights, age):
     if roundedTotalCost == 0:
@@ -129,8 +125,6 @@ def show_tripdetails(tripDestination, numberOfNights, age):
         print("Hotel: " + str(hotel_prices[index]) + "$/night")
         print("Discount: " + str(int(discount)) + "%")
         print("Total for", numberOfNights , "nights (incl. discounts): " + str(roundedTotalCost) + "$\n")
-  
-
 
 def suggest_trip(booleanValues):
     destHighlightsFile = open("C:/Users/annaf/AppData/Local/Programs/Python/Python311/dest_highlights.csv", 'r')
@@ -144,7 +138,6 @@ def suggest_trip(booleanValues):
             if booleanValues[j] == True and dest_highlights[i][j] == "1":
                 print(i)
                 accumulators[i] += 1
-    #print(accumulators)
 
     # i = 0 to start off. If new i is larger, then replace i with larger number.
     count = 0
@@ -177,19 +170,10 @@ def ask_to_createaccount():
         print("\nGoodbye.")
 
 #call functions
-#welcome()
+welcome()
 name, age, nights = ask_user_information()
-
 ask_user_preferences()
-#print(suggest_trip(vacation_activity_booleans))
-#discount = compute_discountpercentage(age)
-# vienna
-#roundedViennaCost = compute_totalcost(997.93, 143.84, nights, age)
-# bali
-#roundedBaliCost = compute_totalcost(849.93, 235.35, nights, age)
-#suggest_trip(userCulture, userActivity, roundedViennaCost, roundedBaliCost)
-#ask_to_createaccount()
 suggest_trip(vacation_activity_booleans)
-#print(finalPlace +"hi")
 compute_totalcost(place, nights, age)
 show_tripdetails(place, nights, age)
+ask_to_createaccount()
