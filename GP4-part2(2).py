@@ -3,8 +3,6 @@
 #Date: July 28, 2023
 
 # PART 2
-# add stuff to file
-# handle non-integer responses accordingly
 
 import random
 
@@ -25,6 +23,36 @@ def read_string_from_file(filename, listname):
             accumulators.append(0)
     file.close()
     return listname
+
+def append_line_to_file(dataString, filename):
+    file = open(filename, 'a')
+ 
+    if dataString == vacation_activity_booleans:
+        for boolean in range(len(vacation_activity_booleans)):
+            if boolean == len(vacation_activity_booleans)-1:
+
+                if boolean == True:
+                    booleans = "1"
+                    file.write(booleans)
+                    file.write("\n")
+                else:
+                    booleans = "0"
+                    file.write(booleans) 
+                    file.write("\n")
+            else:
+                if boolean == True:
+                    booleans = "1"
+                    file.write(booleans)
+                    file.write(",")
+                else:
+                    booleans = "0"
+                    file.write(booleans)
+                    file.write(",")
+    else:
+        file.write(str(dataString))
+        file.write(",")
+    file.close()
+
 
 def welcome():
     print('Welcome! I am your friendly travel agent bot.\n'\
@@ -179,15 +207,16 @@ read_string_from_file("C:/Users/annaf/AppData/Local/Programs/Python/Python311/fl
 read_string_from_file("C:/Users/annaf/AppData/Local/Programs/Python/Python311/hotel_prices.csv", hotel_prices)
 read_string_from_file("C:/Users/annaf/AppData/Local/Programs/Python/Python311/highlights.csv", highlights)
 
-print(destinations)
-print(flight_prices)
-print(hotel_prices)
-print(highlights)
 
 name, age, nights = ask_user_information()
 ask_user_preferences()
-print(vacation_activity_booleans)
 suggest_trip(vacation_activity_booleans)
 compute_totalcost(place, nights, age)
 show_tripdetails(place, nights, age)
 ask_to_createaccount()
+
+
+append_line_to_file(name, "C:/Users/annaf/AppData/Local/Programs/Python/Python311/users.csv")
+append_line_to_file(age, "C:/Users/annaf/AppData/Local/Programs/Python/Python311/users.csv")
+append_line_to_file(vacation_activity_booleans, "C:/Users/annaf/AppData/Local/Programs/Python/Python311/users.csv")
+
