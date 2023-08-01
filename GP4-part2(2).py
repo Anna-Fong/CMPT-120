@@ -15,37 +15,16 @@ highlights = []
 dest_highlights = []
 accumulators = []
 
-
 def read_string_from_file(filename, listname):
     file = open(filename, 'r')
-
-    if listname == dest_highlights:
-        file = open(filename, 'r')
-        for aline in file:
-            aline = aline.replace("\n", "").split(",")
-            dest_highlights.append(aline)
-    elif listname == destinations:
-        print("destinations reading")
-        #file = open(filename, 'r')
-        for aline in file:
-            aline = aline.replace("\n", "")
-            print(aline)
-            listname += aline
+    for aline in file:
+        aline = aline.replace("\n", "")
+        listname.append(aline)
+    if listname == destinations:
         for i in range(len(destinations)):
             accumulators.append(0)
-        listname[0] = str(listname[0]).strip('[]').strip("''")
-    else:
-        #file = open(filename, 'r')
-        print("other reading")
-        for aline in file:
-            aline = aline.replace("\n", "").replace('[',"")
-            listname.append(aline)
-        listname[0] = str(listname[0]).strip('[]').strip("''")
-
-                    
-
     file.close()
-    return destinations
+    return listname
 
 def welcome():
     print('Welcome! I am your friendly travel agent bot.\n'\
@@ -78,10 +57,20 @@ def ask_user_preferences():
     return vacation_activity_booleans
  
 def ask_yesno(yesnoquestion):
-
-    print(yesnoquestion)
-    global yesnoresponse
-    yesnoresponse = input("Please answer y/n. --> ")
+    i = 0
+    while i == 0:
+        print(yesnoquestion)
+        global yesnoresponse
+        yesnoresponse = input("Please answer y/n. --> ")
+        j = 0
+        while j == 0:
+            if yesnoresponse == "y" or yesnoresponse == "n":
+                break
+            else:
+                print("You didn't type 'y' or 'n'!")
+                newInput = (input("Please answer y/n. --> "))
+                yesnoresponse = newInput
+        break
 
     if yesnoresponse == "y":
         yesnoresponse = True
@@ -93,10 +82,21 @@ def ask_yesno(yesnoquestion):
     return yesnoresponse
 
 def ask_number(numberquestion):
-
-    global numberquestionresponse
-    numberquestionresponse = int(input(numberquestion))
-
+    i = 0
+    while i == 0:
+        global numberquestionresponse
+        numberquestionresponse = input(numberquestion)
+        j = 0
+        while j == 0:
+            try:
+                numberquestionresponse = int(numberquestionresponse)
+                break
+            except ValueError:
+                print("You didn't type in a (whole) number!")
+                newInput = input("Please type in a number (w/o decimal point) --> ")
+                numberquestionresponse = newInput
+        print("")
+        break
     return numberquestionresponse
 
 def compute_discountpercentage(userAge):
@@ -133,8 +133,10 @@ def show_tripdetails(tripDestination, numberOfNights, age):
         print("Total for", numberOfNights , "nights (incl. discounts): " + str(roundedTotalCost) + "$\n")
 
 def suggest_trip(booleanValues):
-    read_string_from_file("C:/Users/annaf/AppData/Local/Programs/Python/Python311/dest_highlights.csv", dest_highlights)
-    
+    file = open("C:/Users/annaf/AppData/Local/Programs/Python/Python311/dest_highlights.csv", 'r')
+    for aline in file:
+        aline = aline.replace("\n", "").split(",")
+        dest_highlights.append(aline)
     for i in range(len(destinations)):
         for j in (range(len(dest_highlights[i]))):
             if booleanValues[j] == True and dest_highlights[i][j] == "1":
@@ -173,14 +175,14 @@ def ask_to_createaccount():
 #call functions
 welcome()
 read_string_from_file("C:/Users/annaf/AppData/Local/Programs/Python/Python311/destinations.csv", destinations)
-#read_string_from_file("C:/Users/annaf/AppData/Local/Programs/Python/Python311/flight_prices.csv", flight_prices)
-#read_string_from_file("C:/Users/annaf/AppData/Local/Programs/Python/Python311/hotel_prices.csv", hotel_prices)
-#read_string_from_file("C:/Users/annaf/AppData/Local/Programs/Python/Python311/highlights.csv", highlights)
+read_string_from_file("C:/Users/annaf/AppData/Local/Programs/Python/Python311/flight_prices.csv", flight_prices)
+read_string_from_file("C:/Users/annaf/AppData/Local/Programs/Python/Python311/hotel_prices.csv", hotel_prices)
+read_string_from_file("C:/Users/annaf/AppData/Local/Programs/Python/Python311/highlights.csv", highlights)
 
 print(destinations)
-#print(flight_prices)
-#print(hotel_prices)
-#print(highlights)
+print(flight_prices)
+print(hotel_prices)
+print(highlights)
 
 name, age, nights = ask_user_information()
 ask_user_preferences()
